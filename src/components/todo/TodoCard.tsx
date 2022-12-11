@@ -1,15 +1,17 @@
 import { FC } from "react"
-import { TodoContent } from "./TodoContent"
+import { TodoContent} from "./"
+import { Pokemon } from '../../interface/pokemon';
 
 interface Props{
-  title:string
+  title:string,
+  todos?: Pokemon[],
 }
-export const TodoCard:FC<Props> = ({title}) => {
+export const TodoCard:FC<Props> = ({title,todos}) => {
   return (
     <>
         <div className="todo-card">
           <h1>{title}</h1>
-         <TodoContent/>
+         <TodoContent todos={todos}/>
         </div>
     </>
 

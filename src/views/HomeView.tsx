@@ -1,8 +1,11 @@
-import { TodoCard } from "../components/todo/TodoCard"
+import { TodoCard } from "../components/todo"
+import { useTodos } from '../hooks';
 
 export const HomeView = () => {
+ const {todos,todosInDone,todosInProgress} = useTodos();
+  
   return (
-    <>
+    <>  
     <h1 style={{color:"#fff"}}>TODO App</h1>
     <div className="form-container">
     <form >
@@ -12,9 +15,9 @@ export const HomeView = () => {
     </form>
     </div>
     <div className="todo">
-     <TodoCard title="TODO"/>
-     <TodoCard title="In Progress"/>
-     <TodoCard title="DONE"/>
+     <TodoCard title="TODO" todos={todos}/>
+     <TodoCard title="In Progress" todos={todosInProgress} />
+     <TodoCard title="DONE" todos={todosInDone}/>
      </div>
     </>
   )
