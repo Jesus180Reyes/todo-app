@@ -2,4 +2,86 @@ html body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  background-color: #121212;
+}
+
+.form-container{
+  display: flex;
+  justify-content: center;
+}
+
+ input {
+  border-radius: 15px;
+  font-size: 1rem;
+  height: 5vh;
+  justify-content: center;
+  margin-left: 20px;
+  padding: 10px;
+  width: 50vw;
+}
+
+.todo{
+  /* width: 100vw; */
+  height: 95vh;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  /* background-color: rgb(216, 216, 216);   */
+}
+.todo-card{
+  margin-bottom: 20px;
+  margin-top: 20px;
+  text-align: center;
+  border-radius: 20px;
+  /* height: 95vh; */
+  width: 30vw;
+  background-color: rgb(234, 234, 234);
+  /* background-color: blue; */
+}
+
+.todo-content {
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  /* align-items: center; */
+}
+
+.todo-listile {
+  font-size: 1.5rem;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  margin-bottom: 20px;  
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  height: 20vh;
+}
+
+.todo-listile p{
+  width: 100vw;
+  overflow:hidden;
+  text-overflow: ellipsis;
+  /* overflow: hidden; */
+  /* color: blue; */
+}
+.btn-mark{
+  background-color: green;
+  cursor: pointer;
+  color: #fff;
+  margin-left: 20px;
+  border-radius: 15px;
+  width: 10vw;
+  height: 5vh;
+
+
+}
+
+
+@media (max-width: 650px) {
+  /* Smaller devices */
+  
+  
+  
 }
