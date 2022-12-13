@@ -1,10 +1,10 @@
 import { FC } from "react"
 import { TodoContent} from "./"
-import { Pokemon } from '../../interface/pokemon';
+import { TodoResponse } from '../../interface';
 
 interface Props{
   title:string,
-  todos?: Pokemon[],
+  todos?: TodoResponse,
 }
 export const TodoCard:FC<Props> = ({title,todos}) => {
   return (

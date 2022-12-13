@@ -1,42 +1,43 @@
 import { useEffect, useState } from "react";
-import { Pokemon } from "../interface/pokemon";
+import { serverUrl } from '../api/serverurl';
+import { TodoResponse } from '../interface/todoResponse';
 
 export const useTodos = () => {
-    const [todos, setTodos] = useState<Pokemon[]>();
-    const [todosInProgress, setTodosInProgress] = useState<Pokemon[]>([]);
-    const [todosInDone, setTodosInDone] = useState<Pokemon[]>()
+    const [todos, setTodos] = useState<TodoResponse>();
+    const [todosInProgress, setTodosInProgress] = useState<TodoResponse>();
+    const [todosInDone, setTodosInDone] = useState<TodoResponse>()
 
-    const getTodosTask = async(name:string):Promise<Pokemon>=> {
-      const resp = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`);
-      const data:Pokemon =  await resp.json();
-      setTodos([data]);
+    const getTodosTask = async():Promise<TodoResponse>=> {
+      const resp = await serverUrl.get(`/todos`);
+      const data:TodoResponse = await resp.data
+      setTodos(data);
+      return data 
+  }
+
+    const getTodosInProgress = async():Promise<TodoResponse>=> {
+      const resp = await serverUrl.get("/inProgress");
+      const data:TodoResponse =  await resp.data;
+      setTodosInProgress(data);
       return data 
     }
 
-    const getTodosInProgress = async(name:string):Promise<Pokemon>=> {
-      const resp = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`);
-      const data:Pokemon =  await resp.json();
-      setTodosInProgress([data, ...todosInProgress]);
-      return data 
-    }
-
-    const getTodosInDone = async(name:string):Promise<Pokemon>=> {
-      const resp = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`);
-      const data:Pokemon =  await resp.json();
-      setTodosInDone([data]);
+    const getTodosInDone = async():Promise<TodoResponse>=> {
+      const resp = await serverUrl.get("/done");
+      const data:TodoResponse =  resp.data
+      setTodosInDone(data);
       return data 
     }
     useEffect(() => {
-      getTodosTask("charmander");
+      getTodosTask();
     
       
     }, []);
     useEffect(() => {
-      getTodosInProgress("mew");
+      getTodosInProgress();
       
     }, []);
     useEffect(() => {
-      getTodosInDone("10");
+      getTodosInDone();
     
       
     }, []);
