@@ -2,7 +2,9 @@ import { TodoCard } from "../components/todo"
 import { useTodos } from '../hooks';
 
 export const HomeView = () => {
- const {todos,todosInDone,todosInProgress} = useTodos();
+ const {todos,todosInDone,todosInProgress,statusCode} = useTodos();
+  
+  if(statusCode !== 200) return <h1 style={{color:"white"}}>Error: Network Error</h1>
   
   return (
     <>  
