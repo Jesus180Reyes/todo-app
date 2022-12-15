@@ -2,31 +2,29 @@ import { TodoCard } from "../components/todo"
 import { useTodos } from '../hooks';
 
 export const HomeView = () => {
- const {todos,todosInDone,todosInProgress,statusCode,isLoading,onDisabledButton,onSubmit,setOnChangeRadioInProgress,onClickMarkDone,onInputTargetChange,setOnDisabledButton,setOnChangeValueRadio,onClickMarkInProgress} = useTodos();
-
+ const {todos,todosInDone,todosInProgress,onDisabledButton,isChangeValueDelete,onClickMarkDeleteTodo,setIsChangeValueDelete,onSubmit,setOnChangeRadioInProgress,onClickMarkToDone,onInputTargetChange,setOnDisabledButton,setOnChangeValueRadio,onClickMarkToInProgress} = useTodos();
+ 
   const onChangeValueTodo = (e:any)=> {
+    setIsChangeValueDelete(true);
     setOnDisabledButton(false);
     setOnChangeRadioInProgress("");
     setOnChangeValueRadio(e.target.value);
   }
   const onChangeValueInProgress = (e:any)=> {
+    setIsChangeValueDelete(false);
     setOnDisabledButton(true)
     setOnChangeValueRadio("");
     setOnChangeRadioInProgress(e.target.value);
   }
-
-  if(isLoading) return (<h1 style={{color:"white"}}>Cargando...</h1>)
-  if(statusCode !== 200) return  (<h1 style={{color:"white"}}>Error: Network Error</h1>)  
   return (
     <>  
     <h1 style={{color:"#fff"}}>TODO App</h1>
     <div className="form-container">
     <form onSubmit={onSubmit} >
-
-    <input type="text" placeholder="Agregar una tarea:" onChange={onInputTargetChange} />
-    <button style={{display:`${onDisabledButton? "none":""}`}} className="btn-mark" onClick={onClickMarkInProgress} disabled={onDisabledButton}>Marcar</button>
-    <button style={{display:`${!onDisabledButton? "none":""}`}} className="btn-inProgress" onClick={onClickMarkDone} >Marcar</button>
-    {/* TODO: Crear boton de borrar */}
+    <input type="text" placeholder="Agregar una tarea: (Presiona Enter para Crear)" onChange={onInputTargetChange} />
+    <button style={{display:`${onDisabledButton? "none":""}`}} className="btn-mark" onClick={onClickMarkToInProgress} disabled={onDisabledButton}>Marcar en Progreso</button>
+    <button style={{display:`${!onDisabledButton? "none":""}`}} className="btn-inProgress" onClick={onClickMarkToDone} >Marcar Terminado</button>
+    <button style={{display:`${!isChangeValueDelete? "none":""}`}} className="btn-delete" onClick={onClickMarkDeleteTodo}>Borrar</button>
     </form>
     </div>
     <div className="todo" >
