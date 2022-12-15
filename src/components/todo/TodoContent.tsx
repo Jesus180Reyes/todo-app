@@ -3,8 +3,9 @@ import { TodoResponse } from '../../interface/todoResponse';
 import { timeSince } from '../../helpers/timeSince';
   interface Props {
     todos?:TodoResponse,
+    onChangeTodo?: any
 }
-export const TodoContent:FC<Props>= ({todos}) => {
+export const TodoContent:FC<Props>= ({todos,onChangeTodo}) => {
   return (
     <>
    
@@ -16,7 +17,7 @@ export const TodoContent:FC<Props>= ({todos}) => {
                   <hr/>
                 <div key={todo._id} className="todo-listile">
                 <p >{todo.title}</p>
-                <input type="radio" name="flexRadioDefault"/>
+                <input type="radio"  name="flexRadioDefault" value={todo._id} onChange={onChangeTodo}/>
                 </div>
                 </div>  
               })

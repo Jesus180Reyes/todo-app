@@ -5,13 +5,14 @@ import { TodoResponse } from '../../interface';
 interface Props{
   title:string,
   todos?: TodoResponse,
+  onChangeTodo?:any
 }
-export const TodoCard:FC<Props> = ({title,todos}) => {
+export const TodoCard:FC<Props> = ({title,todos,onChangeTodo}) => {
   return (
     <>
         <div className="todo-card">
           <h1>{title}</h1>
-         <TodoContent todos={todos}/>
+         <TodoContent todos={todos} onChangeTodo={onChangeTodo}/>
         </div>
     </>
 
