@@ -3,9 +3,10 @@ import { TodoResponse } from '../../interface/todoResponse';
 import { timeSince } from '../../helpers/timeSince';
   interface Props {
     todos?:TodoResponse,
-    onChangeTodo?: any
+    onChangeTodo?: any,
+    isCheckbox: boolean
 }
-export const TodoContent:FC<Props>= ({todos,onChangeTodo}) => {
+export const TodoContent:FC<Props>= ({todos,onChangeTodo,isCheckbox}) => {
   return (
     <>
    
@@ -17,7 +18,11 @@ export const TodoContent:FC<Props>= ({todos,onChangeTodo}) => {
                   <hr/>
                 <div key={todo._id} className="todo-listile">
                 <p >{todo.title}</p>
-                <input type="radio"  name="flexRadioDefault" value={todo._id} onChange={onChangeTodo}/>
+                {
+                  isCheckbox 
+                  ? <input type="radio"  name="flexRadioDefault" value={todo._id} onChange={onChangeTodo}/>
+                  : undefined
+                }
                 </div>
                 </div>  
               })

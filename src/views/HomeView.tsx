@@ -26,12 +26,13 @@ export const HomeView = () => {
     <input type="text" placeholder="Agregar una tarea:" onChange={onInputTargetChange} />
     <button style={{display:`${onDisabledButton? "none":""}`}} className="btn-mark" onClick={onClickMarkInProgress} disabled={onDisabledButton}>Marcar</button>
     <button style={{display:`${!onDisabledButton? "none":""}`}} className="btn-inProgress" onClick={onClickMarkDone} >Marcar</button>
+    {/* TODO: Crear boton de borrar */}
     </form>
     </div>
     <div className="todo" >
-     <TodoCard title="TODO" todos={todos} onChangeTodo={onChangeValueTodo}/>
-     <TodoCard title="In Progress" todos={todosInProgress} onChangeTodo={onChangeValueInProgress}/>
-     <TodoCard title="DONE" todos={todosInDone} />
+     <TodoCard title="TODO" todos={todos} onChangeTodo={onChangeValueTodo} isCheckbox={true}/>
+     <TodoCard title="In Progress" todos={todosInProgress} onChangeTodo={onChangeValueInProgress} isCheckbox={true}/>
+     <TodoCard title="DONE" todos={todosInDone} isCheckbox={false}/>
      </div>
     </>
   )

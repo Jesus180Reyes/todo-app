@@ -5,14 +5,15 @@ import { TodoResponse } from '../../interface';
 interface Props{
   title:string,
   todos?: TodoResponse,
-  onChangeTodo?:any
+  onChangeTodo?:any,
+  isCheckbox: boolean
 }
-export const TodoCard:FC<Props> = ({title,todos,onChangeTodo}) => {
+export const TodoCard:FC<Props> = ({title,todos,onChangeTodo,isCheckbox}) => {
   return (
     <>
         <div className="todo-card">
           <h1>{title}</h1>
-         <TodoContent todos={todos} onChangeTodo={onChangeTodo}/>
+         <TodoContent todos={todos} onChangeTodo={onChangeTodo} isCheckbox={isCheckbox}/>
         </div>
     </>
 
