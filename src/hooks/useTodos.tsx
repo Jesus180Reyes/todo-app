@@ -4,15 +4,15 @@ import { TodoResponse } from '../interface';
 
 export const useTodos = () => {
     const [inputChange, setInputChange] = useState<string>("");
-    const [onDisabledButton, setOnDisabledButton] = useState<boolean>();
     const [onChangeValueRadio, setOnChangeValueRadio] = useState<string>("");
     const [onChangeRadioInProgress, setOnChangeRadioInProgress] = useState<string>("");
+    const [onErrorMessage, setOnErrorMessage] = useState<string>()
+    const [statusCode, setstatusCode] = useState<number>()
+    const [onDisabledButton, setOnDisabledButton] = useState<boolean>();
+    const [isLoading, setIsLoading] = useState<boolean>(false);
     const [todos, setTodos] = useState<TodoResponse>();
     const [todosInProgress, setTodosInProgress] = useState<TodoResponse>();
     const [todosInDone, setTodosInDone] = useState<TodoResponse>()
-    const [isLoading, setIsLoading] = useState<boolean>(false);
-    const [statusCode, setstatusCode] = useState<number>()
-    const [onErrorMessage, setOnErrorMessage] = useState<string>()
 
     const getTodosTask = async()=> {
       try {

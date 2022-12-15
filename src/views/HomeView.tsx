@@ -1,6 +1,5 @@
 import { TodoCard } from "../components/todo"
 import { useTodos } from '../hooks';
-import { useState } from 'react';
 
 export const HomeView = () => {
  const {todos,todosInDone,todosInProgress,statusCode,isLoading,onDisabledButton,onSubmit,setOnChangeRadioInProgress,onClickMarkDone,onInputTargetChange,setOnDisabledButton,setOnChangeValueRadio,onClickMarkInProgress} = useTodos();
