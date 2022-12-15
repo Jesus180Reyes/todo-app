@@ -10,22 +10,22 @@ export const useTodos = () => {
     const [statusCode, setstatusCode] = useState<number>()
     const [onDisabledButton, setOnDisabledButton] = useState<boolean>();
     const [isLoading, setIsLoading] = useState<boolean>(false);
+    const [isChangeValueDelete, setIsChangeValueDelete] = useState<boolean>(false);
     const [todos, setTodos] = useState<TodoResponse>();
     const [todosInProgress, setTodosInProgress] = useState<TodoResponse>();
     const [todosInDone, setTodosInDone] = useState<TodoResponse>()
 
-    const getTodosTask = async()=> {
+    const getTodosTask = async():Promise<TodoResponse>=> {
       try {
         setIsLoading(true);
         const resp = await serverUrl.get<TodoResponse>(`/todos`);
         setstatusCode(resp.request.status);
         setOnErrorMessage(resp.request.statusText);
-        const data:TodoResponse = await resp.data
+        const data:TodoResponse =  resp.data
         setTodos(data);
         setIsLoading(false);
         return data 
       } catch (error:any) {
-        console.log(error);
         setOnErrorMessage(error.config.message);
         setIsLoading(false);
         return error
@@ -38,12 +38,11 @@ export const useTodos = () => {
       const resp = await serverUrl.get<TodoResponse>("/inProgress");
       setstatusCode(resp.status);
       setOnErrorMessage(resp.request.statusText);
-      const data:TodoResponse =  await resp.data;
+      const data:TodoResponse =   resp.data;
       setTodosInProgress(data);
       setIsLoading(false);
       return data 
       } catch (error:any) {
-        console.log(error);
         setIsLoading(false);
         return error
       }
@@ -52,7 +51,6 @@ export const useTodos = () => {
 
     const getTodosInDone = async():Promise<TodoResponse>=> {
       try {
-        
         setIsLoading(true)
         const resp = await serverUrl.get<TodoResponse>("/done");
         setstatusCode(resp.status);
@@ -62,7 +60,6 @@ export const useTodos = () => {
         setIsLoading(false);
         return data 
       } catch (error:any) {
-        console.log(error);
         setIsLoading(false);
         return error
       }
@@ -73,10 +70,8 @@ export const useTodos = () => {
       const {data} = await serverUrl.post<TodoResponse>("/todos",{
         title: title
       });
-      console.log(data);
       return data
      } catch (error:any) {
-      console.log(error);
       return error;
       
      }
@@ -84,34 +79,45 @@ export const useTodos = () => {
 
     const postInProgressTodo = async(id:string)=> {
       try {
-        const {data}  = await serverUrl.post(`/inProgress/${id}`);
-        console.log(data);
+        const {data}  = await serverUrl.post<TodoResponse>(`/inProgress/${id}`);
         return data
       } catch (error:any) {
-        console.log(error.message);
         return error
       }
     }
+
     const postInDoneTodo = async(id:string)=> {
       try {
-        const {data}  = await serverUrl.post(`/done/${id}`);
-        console.log(data);
+        const {data}  = await serverUrl.post<TodoResponse>(`/done/${id}`);
         return data
       } catch (error:any) {
-        console.log(error.message);
         return error
       }
     }
-    const onClickMarkInProgress = ()=> {
+    
+    const deleteTodo = async(todo:string,id:string)=> {
+    try {
+      const {data} = await serverUrl.delete(`/${todo}/${id}`); 
+      return data
+    } catch (error:any) {
+      return error
+    }
+    }
+
+    const onClickMarkToInProgress = ()=> {
       postInProgressTodo(onChangeValueRadio);
     }
-    const onClickMarkDone = ()=> {
+    const onClickMarkToDone = ()=> {
       postInDoneTodo(onChangeRadioInProgress);
+    }
+    const onClickMarkDeleteTodo = ()=> {
+      deleteTodo("todos",onChangeValueRadio);
     }
 
     const onInputTargetChange = (e:any)=> {
       setInputChange(e.target.value);
       setOnDisabledButton(false);
+      setIsChangeValueDelete(false);
      }
 
     const onSubmit = ()=> {
@@ -142,16 +148,20 @@ export const useTodos = () => {
     isLoading,
     statusCode,
     onErrorMessage,
+    isChangeValueDelete,
     //* Metodos
     onInputTargetChange,
     setOnChangeValueRadio,
     setOnChangeRadioInProgress,
     setOnDisabledButton,
-    onClickMarkDone,
+    onClickMarkToDone,
     postTodo,
     postInProgressTodo,
-    onClickMarkInProgress,
+    deleteTodo,
+    onClickMarkToInProgress,
     onSubmit,
     postInDoneTodo,
+    setIsChangeValueDelete,
+    onClickMarkDeleteTodo,
   }
 }
