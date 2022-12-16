@@ -1,24 +1,37 @@
 import { FC } from 'react';
-import { Pokemon } from '../../interface/pokemon';
+import { TodoResponse } from '../../interface/todoResponse';
+import { timeSince } from '../../helpers/timeSince';
   interface Props {
-    todos?:Pokemon[],
+    todos?:TodoResponse,
+    onChangeTodo?: any,
+    isCheckbox: boolean
 }
-export const TodoContent:FC<Props>= ({todos}) => {
+export const TodoContent:FC<Props>= ({todos,onChangeTodo,isCheckbox}) => {
   return (
     <>
    
           <div className="todo-content">
             {
-              todos?.map(todo => {
-                return  <div key={todo.id} className="todo-listile">
-                <p >{todo.name}</p>
-                <input type="radio" name="flexRadioDefault"/>
-              </div> 
-            
+              todos?.todos.map(todo => {
+                return <div key={todo._id} className={"timeSince"} >
+                  <p style={{textAlign:"start", marginLeft:"20px"}  }>Creado hace: {timeSince(todo.createdAt.toString())}</p>
+                  <hr/>
+                <div key={todo._id} className="todo-listile">
+                <p >{todo.title}</p>
+                {
+                  isCheckbox 
+                  ? <input type="radio"  name="flexRadioDefault" value={todo._id} onChange={onChangeTodo}/>
+                  : undefined
+                }
+                </div>
+                </div>  
               })
+              
             }
+
           
           </div>
     </>
   )
 }
+ 

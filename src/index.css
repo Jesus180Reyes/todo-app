@@ -77,6 +77,25 @@ html body {
 
 
 }
+.btn-inProgress{
+  background-color: yellow;
+  cursor: pointer;
+  color: #000;
+  margin-left: 20px;
+  border-radius: 15px;
+  width: 10vw;
+  height: 5vh;
+}
+.btn-delete {
+  background-color: red;
+  cursor: pointer;
+  color: #fff;
+  font-weight: bold;
+  margin-left: 20px;
+  border-radius: 15px;
+  width: 10vw;
+  height: 5vh;
+}
 
 
 @media (max-width: 650px) {
